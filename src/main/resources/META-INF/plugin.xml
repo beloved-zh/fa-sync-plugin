@@ -1,0 +1,50 @@
+<idea-plugin>
+    <!-- 插件唯一id，不能和其他插件项目重复
+      插件不同版本之间不能更改，若没有指定，则与插件名称相同 -->
+    <id>org.beloved.fa-plugin</id>
+    <!-- 插件名称 -->
+    <name>fa-update</name>
+    <!-- 插件版本号 -->
+    <version>1.0</version>
+    <!-- 供应商主页和email（不能使用默认值，必须修改成自己的）-->
+    <vendor email="1425279634@qq.com" url="http://www.beloved.com">Beloved</vendor>
+
+    <!-- 插件的描述 （不能使用默认值，必须修改成自己的。并且需要大于40个字符）-->
+    <description><![CDATA[
+    Enter short description2121212 for your plugin here.<br>
+    <em>most HTML tags m212ay be21212121 used</em>
+    ]]></description>
+    <!-- 插件版本变更信息，支持HTML标签；
+      将展示在 settings | Plugins 对话框和插件仓库的Web页面 -->
+    <change-notes><![CDATA[
+        Add change noeqweqweqwtes here.<br>
+        <em>most qewqeHTML eqweqwetags may be used</em>
+        ]]>
+    </change-notes>
+
+    <!-- 插件兼容IDEAbuild 号-->
+    <idea-version since-build="173.0"/>
+
+    <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
+         on how to target different products -->
+    <!-- 插件所依赖的其他插件的id -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <!-- 声明该插件对IDEA core或其他插件的扩展 -->
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+        <action id="TestAction" class="com.beloved.action.TestAction" text="测试" description="测试">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="alt F"/>
+        </action>
+        <action id="SyncFileAction" class="com.beloved.action.SyncFileAction" text="SyncFileAction"
+                description="项目右键Action">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="alt V"/>
+        </action>
+    </actions>
+</idea-plugin>
