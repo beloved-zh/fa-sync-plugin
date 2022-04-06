@@ -3,6 +3,9 @@ plugins {
     id 'java'
 }
 
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
 group 'org.beloved'
 version '0.0.1'
 

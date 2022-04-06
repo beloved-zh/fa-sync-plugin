@@ -22,7 +22,7 @@
     <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
          on how to target different products -->
     <!-- 插件所依赖的其他插件的id -->
-    <depends>com.intellij.modules.platform</depends>
+<!--    <depends>com.intellij.modules.platform</depends>-->
 
     <!-- 声明该插件对IDEA core或其他插件的扩展 -->
     <extensions defaultExtensionNs="com.intellij">
@@ -35,8 +35,8 @@
             <add-to-group group-id="ToolsMenu" anchor="first"/>
             <keyboard-shortcut keymap="$default" first-keystroke="alt F"/>
         </action>
-        <action id="SyncFileAction" class="com.beloved.action.SyncFileAction" text="SyncFileAction"
-                description="项目右键Action">
+        <action id="SyncFileAction" class="com.beloved.action.SyncFileAction" text="SyncFile"
+                description="同步文件">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
             <keyboard-shortcut keymap="$default" first-keystroke="alt V"/>
         </action>
