@@ -27,8 +27,14 @@ intellij {
 }
 patchPluginXml {
     changeNotes = """
-      v0.0.1.<br>
-      <em>测试版本</em>"""
+      <h3>v0.0.1</h3>
+      <ul>
+        <li>web资源单文件更新</li>
+        <li>暂不支持web资源文件夹更新</li>
+        <li>更新文件必须存在服务器中</li>
+        <li>暂不支持非web资源更新</li>
+      </ul>
+    """
 }
 test {
     useJUnitPlatform()
