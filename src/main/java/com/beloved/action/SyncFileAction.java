@@ -14,12 +14,12 @@ import java.util.Properties;
 
 public class SyncFileAction extends AnAction {
 
-    private String buildFileName = "build.properties";
-
-    private String coreBuildFileName = "core/build.properties";
-
-    private Project myProject;
-
+    private static String buildFileName = "build.properties";
+    
+    private static Project myProject;
+    
+    private static String fileSeparator = File.separator;
+    
     @Override
     public void actionPerformed(AnActionEvent event) {
         // TODO: insert action logic here
@@ -84,6 +84,12 @@ public class SyncFileAction extends AnAction {
     public void copyFile(String sourcePath, String targetPath){
         File source = new File(sourcePath);
         File target = new File(targetPath);
+
+        // 是否有父级目录没有则创建
+        if(!target.getParentFile().exists()){
+            target.getParentFile().mkdirs();
+        }
+        
         FileChannel input = null;
         FileChannel output = null;
         try {
@@ -108,22 +114,26 @@ public class SyncFileAction extends AnAction {
         String basePath = myProject.getBasePath();
 
         // 配置文件路径
-        String buildFilePath = basePath + "/" + buildFileName;
-        String coreBuildFilePath = basePath + "/" + coreBuildFileName;
+        StringBuilder buildFilePath = new StringBuilder(basePath);
+        buildFilePath.append(fileSeparator).append(buildFileName);
+
+
+        StringBuilder coreBuildFilePath = new StringBuilder(basePath);
+        coreBuildFilePath.append(fileSeparator).append("core").append(fileSeparator).append(buildFileName);
 
         // 应用名称
-        String appName = getPropertiesValue(coreBuildFilePath, "webapp.name");
+        String appName = getPropertiesValue(coreBuildFilePath.toString(), "webapp.name");
 
         // 服务器（tomcat\weblogic）地址
-        String containerPath = getPropertiesValue(buildFilePath, "wl_domains_home");
+        String containerPath = getPropertiesValue(buildFilePath.toString(), "wl_domains_home");
 
         // 部署地址
-        String targetDir = getPropertiesValue(buildFilePath, "target.dir");
+        String targetDir = getPropertiesValue(buildFilePath.toString(), "target.dir");
         targetDir = targetDir.replace("${wl_domains_home}", containerPath);
-        targetDir = targetDir + "/" + appName;
+        targetDir = targetDir + fileSeparator + appName;
 
         // 项目 web 资源路径
-        String webDir = getPropertiesValue(buildFilePath, "web.dir");
+        String webDir = getPropertiesValue(buildFilePath.toString(), "web.dir");
         webDir = webDir.replace("${make_home}", basePath);
 
         // 选中文件

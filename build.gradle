@@ -7,7 +7,7 @@ tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }
 group 'org.beloved'
-version '0.0.1'
+version '0.0.2'
 
 sourceCompatibility=1.8
 
@@ -27,6 +27,11 @@ intellij {
 }
 patchPluginXml {
     changeNotes = """
+      <h3>v0.0.2</h3>
+      <ul>
+        <li>兼容Mac</li>
+        <li>创建不存在目录</li>
+      </ul>
       <h3>v0.0.1</h3>
       <ul>
         <li>web资源单文件更新</li>

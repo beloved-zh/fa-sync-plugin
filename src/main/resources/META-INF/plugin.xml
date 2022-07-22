@@ -5,7 +5,7 @@
     <!-- 插件名称 -->
     <name>fa-sync-plugin</name>
     <!-- 插件版本号 -->
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <!-- 供应商主页和email（不能使用默认值，必须修改成自己的）-->
     <vendor email="1425279634@qq.com" url="https://github.com/beloved-zh">Beloved</vendor>
 
@@ -13,7 +13,7 @@
     <description><![CDATA[
         <h3>fa-sync-plugin</h3>
         Alt + V 自动替换 web 资源 <br/>
-        <em>凑字数~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</em>
+        <em>根据 `build.properties` 文件配置自动替换 `web`目录下的文件到配置服务器</em>
     ]]></description>
 
     <!-- 插件兼容IDEA -->
@@ -31,10 +31,6 @@
 
     <actions>
         <!-- Add your actions here -->
-<!--        <action id="TestAction" class="com.beloved.action.TestAction" text="测试" description="测试">-->
-<!--            <add-to-group group-id="ToolsMenu" anchor="first"/>-->
-<!--            <keyboard-shortcut keymap="$default" first-keystroke="alt F"/>-->
-<!--        </action>-->
         <action id="SyncFileAction" class="com.beloved.action.SyncFileAction" text="SyncFile"
                 description="同步文件">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
