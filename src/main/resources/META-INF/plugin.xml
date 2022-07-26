@@ -5,19 +5,21 @@
     <!-- 插件名称 -->
     <name>fa-sync-plugin</name>
     <!-- 插件版本号 -->
-    <version>0.0.2</version>
+    <version>0.1.1</version>
     <!-- 供应商主页和email（不能使用默认值，必须修改成自己的）-->
     <vendor email="1425279634@qq.com" url="https://github.com/beloved-zh">Beloved</vendor>
 
     <!-- 插件的描述 （不能使用默认值，必须修改成自己的。并且需要大于40个字符）-->
     <description><![CDATA[
         <h3>fa-sync-plugin</h3>
-        Alt + V 自动替换 web 资源 <br/>
+        监听web目录文件修改后自动同步 <br/>
+        Alt + V 手动同步替换选中资源 <br/>
         <em>根据 `build.properties` 文件配置自动替换 `web`目录下的文件到配置服务器</em>
     ]]></description>
 
     <!-- 插件兼容IDEA -->
-    <idea-version since-build="173.0"/>
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+    <idea-version since-build="193.0"/>
 
     <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
          on how to target different products -->
@@ -26,9 +28,30 @@
 
     <!-- 声明该插件对IDEA core或其他插件的扩展 -->
     <extensions defaultExtensionNs="com.intellij">
-        <!-- Add your extensions here -->
-    </extensions>
+        <projectService serviceInterface="com.beloved.service.SettingsStorageService" 
+                        serviceImplementation="com.beloved.service.impl.SettingsStorageServiceImpl"/>
+        
+        <projectConfigurable
+                             instance="com.beloved.ui.MainSettingForm"
+                             id="com.beloved.ui.MainSettingForm"
+                             nonDefaultProject="true" />
 
+    </extensions>
+    
+    <projectListeners>
+    </projectListeners>
+
+    
+    <applicationListeners>
+        <listener class="com.beloved.listener.MyProjectListener"
+                  topic="com.intellij.openapi.project.ProjectManagerListener">
+        </listener>
+    </applicationListeners>
+
+    <application-components>
+        <!-- Add your application components here -->
+    </application-components>
+    
     <actions>
         <!-- Add your actions here -->
         <action id="SyncFileAction" class="com.beloved.action.SyncFileAction" text="SyncFile"

@@ -1,3 +1,15 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url 'https://plugins.gradle.org/m2/' }
+        maven { url 'https://oss.sonatype.org/content/repositories/releases/' }
+    }
+    // https://github.com/JetBrains/gradle-intellij-plugin/ 关注开发插件版本
+    dependencies {
+        classpath "org.jetbrains.intellij.plugins:gradle-intellij-plugin:0.7.3"
+    }
+}
+
 plugins {
     id 'org.jetbrains.intellij' version '1.1'
     id 'java'
@@ -7,7 +19,7 @@ tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }
 group 'org.beloved'
-version '0.0.2'
+version '0.1.1'
 
 sourceCompatibility=1.8
 
@@ -22,11 +34,18 @@ dependencies {
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version = '2017.3'
+    // 开发环境运行时使用的版本
+    version = '2019.3'
     updateSinceUntilBuild=false
 }
 patchPluginXml {
     changeNotes = """
+      <h3>v0.1.1</h3>
+      <ul>
+        <li>新增自动同步，需手动开启</li>
+        <li>兼容0.0.x版本手动同步</li>
+        <li>手动同步新增同步文件夹</li>
+      </ul>
       <h3>v0.0.2</h3>
       <ul>
         <li>兼容Mac</li>
