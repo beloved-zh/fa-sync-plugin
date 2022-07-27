@@ -5,14 +5,14 @@
     <!-- 插件名称 -->
     <name>fa-sync-plugin</name>
     <!-- 插件版本号 -->
-    <version>0.1.1</version>
+    <version>0.2.1</version>
     <!-- 供应商主页和email（不能使用默认值，必须修改成自己的）-->
     <vendor email="1425279634@qq.com" url="https://github.com/beloved-zh">Beloved</vendor>
 
     <!-- 插件的描述 （不能使用默认值，必须修改成自己的。并且需要大于40个字符）-->
     <description><![CDATA[
         <h3>fa-sync-plugin</h3>
-        监听web目录文件修改后自动同步 <br/>
+        监听 web 目录文件修改后自动同步 <br/>
         Alt + V 手动同步替换选中资源 <br/>
         <em>根据 `build.properties` 文件配置自动替换 `web`目录下的文件到配置服务器</em>
     ]]></description>
@@ -44,8 +44,11 @@
     
     <applicationListeners>
         <listener class="com.beloved.listener.MyProjectListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener">
-        </listener>
+                  topic="com.intellij.openapi.project.ProjectManagerListener" />
+        <listener class="com.beloved.listener.MyBulkFileListener"
+                  topic="com.intellij.openapi.vfs.newvfs.BulkFileListener" />
+<!--        <listener class="com.beloved.listener.MyVirtualFileListener"-->
+<!--                  topic="com.intellij.openapi.vfs.VirtualFileListener" />-->
     </applicationListeners>
 
     <application-components>

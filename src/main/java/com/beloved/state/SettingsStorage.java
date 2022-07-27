@@ -7,20 +7,20 @@ package com.beloved.state;
  */
 public class SettingsStorage {
     
-    private boolean autoSync;
+    private boolean openFAPlugin;
 
     public SettingsStorage() {
     }
 
-    public SettingsStorage(boolean autoSync) {
-        this.autoSync = autoSync;
+    public SettingsStorage(boolean openFAPlugin) {
+        this.openFAPlugin = openFAPlugin;
     }
 
-    public boolean getAutoSync() {
-        return autoSync;
+    public boolean getOpenFAPlugin() {
+        return openFAPlugin;
     }
 
-    public void setAutoSync(boolean autoSync) {
-        this.autoSync = autoSync;
+    public void setOpenFAPlugin(boolean openFAPlugin) {
+        this.openFAPlugin = openFAPlugin;
     }
 }

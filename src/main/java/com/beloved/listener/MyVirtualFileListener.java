@@ -1,6 +1,7 @@
 package com.beloved.listener;
 
 import com.beloved.core.FaCore;
+import com.beloved.service.SettingsStorageService;
 import com.beloved.utils.PushUtils;
 import com.intellij.notification.NotificationType;
 import com.intellij.openapi.vfs.*;
@@ -35,6 +36,9 @@ public class MyVirtualFileListener implements VirtualFileListener {
      */
     @Override
     public void contentsChanged(@NotNull VirtualFileEvent event) {
+        if (!SettingsStorageService.getSettingsStorage().getOpenFAPlugin()) {
+            return;
+        }
         String filePath = event.getFile().getPath();
         if (FaCore.judgeWebFile(filePath)) {
             FaCore.fileSync(filePath);

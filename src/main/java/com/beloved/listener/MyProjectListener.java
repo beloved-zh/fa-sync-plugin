@@ -4,7 +4,6 @@ import com.beloved.core.FaCore;
 import com.beloved.service.SettingsStorageService;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManagerListener;
-import com.intellij.openapi.vfs.VirtualFileManager;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -19,15 +18,16 @@ public class MyProjectListener implements ProjectManagerListener {
     @Override
     public void projectOpened(@NotNull Project project) {
         
-        try {
-            FaCore.setProjectBuildConfigure(project);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (SettingsStorageService.getSettingsStorage(project).getOpenFAPlugin()) {
+            try {
+                FaCore.setProjectBuildConfigure(project);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } 
         }
-        
-        if (SettingsStorageService.getSettingsStorage().getAutoSync()) {
-            VirtualFileManager.getInstance().addVirtualFileListener(MyVirtualFileListener.getInstance());
-        }
+        // https://plugins.jetbrains.com/docs/intellij/virtual-file-system.html#virtual-file-system-events
+        // applicationListeners级别，所以需要在监听器内过滤无关事件   ProjectFileIndex.isInContent()
+//        VirtualFileManager.getInstance().addVirtualFileListener(MyVirtualFileListener.getInstance());
     }
     
 }

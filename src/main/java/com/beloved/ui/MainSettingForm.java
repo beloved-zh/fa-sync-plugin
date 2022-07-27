@@ -1,15 +1,16 @@
 package com.beloved.ui;
 
-import com.beloved.listener.MyVirtualFileListener;
+import com.beloved.core.FaCore;
 import com.beloved.state.SettingsStorage;
+import com.beloved.utils.ProjectUtils;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.vfs.VirtualFileManager;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.io.IOException;
 
 /**
  * @Author: Beloved
@@ -18,7 +19,7 @@ import javax.swing.*;
  */
 public class MainSettingForm implements Configurable, BaseSettings {
     private JPanel mainPanel;
-    private JCheckBox autoSync;
+    private JCheckBox openFAPlugin;
 
     @Nls(capitalization = Nls.Capitalization.Title)
     @Override
@@ -35,7 +36,7 @@ public class MainSettingForm implements Configurable, BaseSettings {
 
     @Override
     public boolean isModified() {
-        if (this.autoSync.isSelected() != getSettingsStorage().getAutoSync()) {
+        if (this.openFAPlugin.isSelected() != getSettingsStorage().getOpenFAPlugin()) {
             return true;
         }
         return false;
@@ -43,18 +44,22 @@ public class MainSettingForm implements Configurable, BaseSettings {
 
     @Override
     public void apply() throws ConfigurationException {
-        getSettingsStorage().setAutoSync(autoSync.isSelected());
-        if (autoSync.isSelected()) {
-            VirtualFileManager.getInstance().addVirtualFileListener(MyVirtualFileListener.getInstance());
-        } else {
-            VirtualFileManager.getInstance().removeVirtualFileListener(MyVirtualFileListener.getInstance());
+        getSettingsStorage().setOpenFAPlugin(openFAPlugin.isSelected());
+        if (openFAPlugin.isSelected()) {
+            try {
+                FaCore.setProjectBuildConfigure(ProjectUtils.getCurrProject());
+            } catch (IOException e) {
+                openFAPlugin.setSelected(false);
+                getSettingsStorage().setOpenFAPlugin(false);
+                e.printStackTrace();
+            }
         }
     }
 
     @Override
     public void loadSettingsStore(@NotNull SettingsStorage settingsStorage) {
-        if (settingsStorage.getAutoSync()) {
-            this.autoSync.setSelected(settingsStorage.getAutoSync());
+        if (settingsStorage.getOpenFAPlugin()) {
+            this.openFAPlugin.setSelected(settingsStorage.getOpenFAPlugin());
         }
     }
 }

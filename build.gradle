@@ -19,7 +19,7 @@ tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }
 group 'org.beloved'
-version '0.1.1'
+version '0.2.1'
 
 sourceCompatibility=1.8
 
@@ -40,6 +40,14 @@ intellij {
 }
 patchPluginXml {
     changeNotes = """
+      <h3>v0.2.1</h3>
+      <ul>
+        <li>插件支持需单项目手动开启</li>
+        <li>去除自动同步开关，开启插件支持后自动开启自动同步</li>
+        <li>更改虚拟文件监听实现</li>
+        <li>修复全局消息通知bug</li>
+        <li>修复监听器重复注册bug</li>
+      </ul>
       <h3>v0.1.1</h3>
       <ul>
         <li>新增自动同步，需手动开启</li>
